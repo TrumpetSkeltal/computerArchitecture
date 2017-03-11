@@ -17,7 +17,6 @@ main:
 	
 	la $t0, buf0
 	la $t1, buf0
-	li $t4, 0
 	
 loop_begin:
 	lb $t3, ($t1)
