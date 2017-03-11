@@ -1,0 +1,47 @@
+.data
+text0 :	.asciiz "Enter your string \n"
+buf0 :	.space 100
+	.text
+	.globl main
+main: 
+	la $a0, text0
+	li $v0, 4
+	syscall
+	
+	la $a0, buf0
+	li $a1, 99
+	li $v0, 8
+	syscall 
+	
+	li $t1, 'A'
+	li $t2, 'z'
+	li $t5, 'a'
+	li $t6, 'Z'
+	la $t3, buf0
+
+loop_begin: 
+	lb $t4, ($t3)
+	beq $t4, '\n', loop_end #we don't want an extra star at the end of the string, hence we end the loop at '\n'
+	
+	blt $t4, $t1, change 
+	bgt $t4, $t2, change 
+	bgt $t4, $t6, check
+check: 
+	blt $t4, $t5, change
+	b increment_ptr
+change:
+	li $t4, '*'
+	sb $t4, ($t3)
+	
+increment_ptr:
+	add $t3, $t3, 1
+	b loop_begin
+	
+loop_end:
+	la $a0, buf0
+	li $v0, 4
+	syscall
+	
+	li $v0, 10
+	syscall
+	
