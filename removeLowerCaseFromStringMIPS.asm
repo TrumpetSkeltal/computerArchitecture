@@ -1,4 +1,4 @@
-#wczytany string a1b\cd!A ze stringa usun male literki -> 1\!A
+
 .data
 text0:	.asciiz "Enter string \n"
 buf0:	.space 100
